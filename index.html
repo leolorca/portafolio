@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leonardo Lorca | Frontend Developer</title>
+  <style>
+    /* === Variables de color === */
+    :root {
+      --blue:    #0FA3B1;
+      --green:   #D9E5D6;
+      --yellow:  #EDDEA4;
+      --orange:  #F7A072;
+      --saffron: #FF9B42;
+      --dark:    #1a1a2e;
+      --gray:    #5a5a72;
+      --white:   #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* === Navegación === */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--white);
+      border-bottom: 3px solid var(--blue);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul a:hover {
+      color: var(--blue);
+    }
+
+    /* === Hero === */
+    #inicio {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--dark) 0%, #16213e 60%, #0f3460 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #inicio::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(15,163,177,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-content h1 span {
+      color: var(--saffron);
+    }
+
+    .hero-content p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 2.5rem;
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--saffron);
+      color: var(--dark);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,155,66,0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid rgba(255,255,255,0.4);
+      transition: border-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--blue);
+    }
+
+    /* === Secciones generales === */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+
+    .section-divider {
+      width: 50px;
+      height: 4px;
+      background: var(--saffron);
+      border-radius: 2px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* === Sobre mí === */
+    #sobre-mi {
+      background: var(--green);
+      max-width: 100%;
+      padding: 5rem 2rem;
+    }
+
+    .sobre-mi-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .sobre-mi-texto p {
+      color: var(--gray);
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .skill-tag {
+      background: var(--white);
+      color: var(--dark);
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 2px solid var(--blue);
+    }
+
+    .sobre-mi-visual {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .sobre-mi-visual h3 {
+      color: var(--blue);
+      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--green);
+      font-size: 0.95rem;
+    }
+
+    .info-item:last-child {
+      border-bottom: none;
+    }
+
+    .info-item span:first-child {
+      color: var(--gray);
+    }
+
+    .info-item span:last-child {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* === Proyectos === */
+    #proyectos {
+      padding: 5rem 2rem;
+    }
+
+    .proyectos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .proyecto-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s, box-shadow 0.3s;
+      background: var(--white);
+      border: 1px solid #eee;
+    }
+
+    .proyecto-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    }
+
+    .proyecto-img {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .proyecto-body {
+      padding: 1.5rem;
+    }
+
+    .proyecto-body h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .proyecto-body p {
+      color: var(--gray);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .proyecto-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .proyecto-tag {
+      background: var(--yellow);
+      color: var(--dark);
+      padding: 0.2rem 0.7rem;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .proyecto-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .proyecto-link:hover {
+      text-decoration: underline;
+    }
+
+    /* === Caso de estudio === */
+    #caso-estudio {
+      background: linear-gradient(135deg, #0FA3B1 0%, #0c8a96 100%);
+      max-width: 100%;
+      padding: 5rem 2rem;
+    }
+
+    .caso-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    #caso-estudio .section-label {
+      color: rgba(255,255,255,0.8);
+    }
+
+    #caso-estudio .section-title {
+      color: var(--white);
+    }
+
+    #caso-estudio .section-divider {
+      background: var(--saffron);
+    }
+
+    .caso-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .caso-card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .caso-card h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--saffron);
+      margin-bottom: 0.8rem;
+    }
+
+    .caso-card p, .caso-card li {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .caso-card ul {
+      padding-left: 1.2rem;
+    }
+
+    .caso-card li {
+      margin-bottom: 0.3rem;
+    }
+
+    .metricas-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .metrica {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .metrica-numero {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--saffron);
+    }
+
+    .metrica-label {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    /* === Contacto === */
+    #contacto {
+      background: var(--dark);
+      max-width: 100%;
+      padding: 5rem 2rem;
+    }
+
+    .contacto-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    #contacto .section-label {
+      color: var(--orange);
+    }
+
+    #contacto .section-title {
+      color: var(--white);
+    }
+
+    #contacto .section-divider {
+      background: var(--orange);
+    }
+
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contacto-info p {
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    .contacto-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contacto-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .contacto-link:hover {
+      color: var(--saffron);
+    }
+
+    .link-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    /* Formulario */
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      letter-spacing: 1px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+
+    .form-group textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .btn-form {
+      background: var(--saffron);
+      color: var(--dark);
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: opacity 0.2s;
+    }
+
+    .btn-form:hover {
+      opacity: 0.9;
+    }
+
+    /* === Footer === */
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 1.5rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+    }
+
+    /* === Responsive básico === */
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 2rem; }
+      .sobre-mi-inner { grid-template-columns: 1fr; }
+      .caso-grid { grid-template-columns: 1fr; }
+      .metricas-row { grid-template-columns: 1fr; }
+      .contacto-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 1rem; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación -->
+  <nav>
+    <div class="nav-logo">LL.</div>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#caso-estudio">Caso de estudio</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div id="inicio">
+    <div class="hero-content">
+      <div class="hero-tag">Frontend Developer</div>
+      <h1>Hola, soy <span>Leonardo Lorca</span></h1>
+      <p>Construyo interfaces que convierten visitantes en usuarios. Diseño con propósito, código con claridad.</p>
+      <div class="hero-buttons">
+        <a href="#proyectos" class="btn-primary">Ver mis proyectos</a>
+        <a href="#contacto" class="btn-secondary">Hablemos</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sobre mí -->
+  <div id="sobre-mi">
+    <div class="sobre-mi-inner">
+      <div class="sobre-mi-texto">
+        <div class="section-label">Quién soy</div>
+        <h2 class="section-title">Diseño que habla.<br>Código que trabaja.</h2>
+        <div class="section-divider"></div>
+        <p>Soy un desarrollador frontend en formación con foco en experiencias de usuario limpias y funcionales. Me apasiona transformar ideas en interfaces que las personas disfrutan usar.</p>
+        <p>Trabajo con HTML, CSS y JavaScript para construir sitios web atractivos y accesibles, siempre buscando la mejor solución con el menor ruido visual posible.</p>
+        <div class="skills-grid">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Responsive Design</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">UX Básico</span>
+        </div>
+      </div>
+      <div class="sobre-mi-visual">
+        <h3>Información de contacto</h3>
+        <div class="info-item">
+          <span>Correo</span>
+          <span>leonardo.lorca@gmail.com</span>
+        </div>
+        <div class="info-item">
+          <span>LinkedIn</span>
+          <span>linkedin.com/in/leolorca</span>
+        </div>
+        <div class="info-item">
+          <span>GitHub</span>
+          <span>github.com/leolorca</span>
+        </div>
+        <div class="info-item">
+          <span>Ubicación</span>
+          <span>Chile</span>
+        </div>
+        <div class="info-item">
+          <span>Disponibilidad</span>
+          <span>Abierto a oportunidades</span>
+        </div>
+        <div class="info-item">
+          <span>Modalidad</span>
+          <span>Remoto / Híbrido</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Proyectos -->
+  <section id="proyectos">
+    <div class="section-label">Mi trabajo</div>
+    <h2 class="section-title">Proyectos destacados</h2>
+    <div class="section-divider"></div>
+
+    <div class="proyectos-grid">
+
+      <!-- SmartBudget -->
+      <div class="proyecto-card">
+        <div class="proyecto-img" style="background: linear-gradient(135deg, #0FA3B1, #0c8a96);"></div>
+        <div class="proyecto-body">
+          <h3>SmartBudget</h3>
+          <p>Landing page completa para una app de finanzas personales. Incluye navbar, hero, cards de características, sección de precios y modal de registro.</p>
+          <div class="proyecto-tags">
+            <span class="proyecto-tag">HTML5</span>
+            <span class="proyecto-tag">SASS</span>
+            <span class="proyecto-tag">Bootstrap 4</span>
+            <span class="proyecto-tag">BEM</span>
+          </div>
+          <a href="#caso-estudio" class="proyecto-link">Ver caso de estudio →</a>
+        </div>
+      </div>
+
+      <!-- La CotiApp -->
+      <div class="proyecto-card">
+        <div class="proyecto-img" style="background: linear-gradient(135deg, #EDDEA4, #F7A072);"></div>
+        <div class="proyecto-body">
+          <h3>La CotiApp</h3>
+          <p>Aplicación de cotizaciones digitales con catálogo de servicios, registro de cliente y generación de presupuesto dinámico usando JavaScript puro.</p>
+          <div class="proyecto-tags">
+            <span class="proyecto-tag">HTML</span>
+            <span class="proyecto-tag">CSS</span>
+            <span class="proyecto-tag">JavaScript</span>
+            <span class="proyecto-tag">DOM</span>
+          </div>
+          <a href="#" class="proyecto-link">Ver en GitHub →</a>
+        </div>
+      </div>
+
+      <!-- BookList SPA -->
+      <div class="proyecto-card">
+        <div class="proyecto-img" style="background: linear-gradient(135deg, #D9E5D6, #0FA3B1);"></div>
+        <div class="proyecto-body">
+          <h3>BookList SPA</h3>
+          <p>Biblioteca digital para Editorial Nova. Single Page Application con catálogo de libros, vistas de detalle y navegación entre rutas sin recargar la página.</p>
+          <div class="proyecto-tags">
+            <span class="proyecto-tag">Vue.js</span>
+            <span class="proyecto-tag">Vue Router</span>
+            <span class="proyecto-tag">Vite</span>
+            <span class="proyecto-tag">SPA</span>
+          </div>
+          <a href="#" class="proyecto-link">Ver en GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Caso de estudio -->
+  <div id="caso-estudio">
+    <div class="caso-inner">
+      <div class="section-label">Caso de estudio</div>
+      <h2 class="section-title">SmartBudget: Landing Page con SASS y Bootstrap</h2>
+      <div class="section-divider"></div>
+
+      <div class="caso-grid">
+        <div class="caso-card">
+          <h4>Descripcion del proyecto</h4>
+          <p>Desarrollo de la landing page completa de SmartBudget, una app de finanzas personales. El sitio incluye navbar responsiva, hero con call to action, grilla de características, sección de pasos, testimonios, planes de precios y un modal de registro. Todo maquetado desde un prototipo en Figma.</p>
+        </div>
+        <div class="caso-card">
+          <h4>Desafio principal</h4>
+          <p>Organizar los estilos de un sitio con múltiples secciones y componentes sin que el CSS se volviera inmanejable. El reto fue aplicar una arquitectura de estilos escalable usando SASS con el patrón 7-1 y la metodología BEM, manteniendo coherencia visual en todas las secciones y responsividad en móvil, tablet y escritorio.</p>
+        </div>
+        <div class="caso-card">
+          <h4>Solucion propuesta</h4>
+          <p>Se estructuró el CSS con SASS siguiendo el patrón 7-1 (abstracts, base, components, layout, pages, themes, vendors). Se aplicó BEM para nombrar las clases de forma predecible. Bootstrap 4 se usó para el sistema de grilla, navbar colapsable y el modal, evitando sobreescribir sus estilos con clases personalizadas.</p>
+        </div>
+        <div class="caso-card">
+          <h4>Herramienta tecnica utilizada</h4>
+          <p>HTML5 semántico, SASS compilado a CSS, Bootstrap 4 via CDN e iconos SVG de Tabler Icons. El prototipo fue desarrollado en Figma antes de codificar. Git para control de versiones y GitHub Pages para el despliegue del resultado final.</p>
+        </div>
+        <div class="caso-card">
+          <h4>Principales aprendizajes</h4>
+          <ul>
+            <li>Arquitectura SASS con patrón 7-1 y estructura por carpetas</li>
+            <li>Variables, mixins y anidamiento en SASS</li>
+            <li>Metodología BEM aplicada a un proyecto real</li>
+            <li>Integración de Bootstrap 4 sin romper estilos propios</li>
+            <li>Flujo de trabajo Figma a código: prototipo, maquetado, ajuste</li>
+          </ul>
+        </div>
+        <div class="caso-card">
+          <h4>Habilidades tecnicas aplicadas</h4>
+          <ul>
+            <li>HTML5 semántico con jerarquía de componentes</li>
+            <li>SASS: variables, mixins, nesting, partials</li>
+            <li>Metodología BEM para clases CSS</li>
+            <li>Bootstrap 4: grid, navbar, cards, modal</li>
+            <li>Flexbox y media queries para responsividad</li>
+            <li>Git y GitHub Pages para versión y despliegue</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="metricas-row">
+        <div class="metrica">
+          <div class="metrica-numero">7</div>
+          <div class="metrica-label">Carpetas SASS organizadas con el patron 7-1</div>
+        </div>
+        <div class="metrica">
+          <div class="metrica-numero">6</div>
+          <div class="metrica-label">Secciones distintas construidas y responsivas</div>
+        </div>
+        <div class="metrica">
+          <div class="metrica-numero">100%</div>
+          <div class="metrica-label">Componentes nombrados con metodologia BEM</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem;">
+        <div class="caso-card">
+          <h4>Por que elegí este proyecto</h4>
+          <p style="color: rgba(255,255,255,0.9);">SmartBudget es el proyecto donde el salto técnico fue más visible. Pasar de escribir CSS plano a estructurar estilos con SASS y BEM cambió completamente mi forma de trabajar. Aprendí a pensar en componentes antes de escribir una sola línea de código, a usar Bootstrap sin perder el control del diseño y a mantener un proyecto organizado a medida que crece. Es el trabajo que mejor refleja mi avance en desarrollo frontend hasta el momento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contacto -->
+  <div id="contacto">
+    <div class="contacto-inner">
+      <div class="section-label">Trabajemos juntos</div>
+      <h2 class="section-title">Hablemos de tu próximo proyecto</h2>
+      <div class="section-divider" style="background: var(--orange);"></div>
+
+      <div class="contacto-grid">
+        <div class="contacto-info">
+          <p>Estoy disponible para oportunidades de trabajo remoto o híbrido. Si tienes un proyecto en mente o una vacante que pueda encajar con mi perfil, me encantaría escucharte.</p>
+          <div class="contacto-links">
+            <a href="mailto:leonardo.lorca@gmail.com" class="contacto-link">
+              <div class="link-icon">✉</div>
+              leonardo.lorca@gmail.com
+            </a>
+            <a href="https://linkedin.com/in/leolorca" class="contacto-link">
+              <div class="link-icon">in</div>
+              linkedin.com/in/leolorca
+            </a>
+            <a href="https://github.com/leolorca" class="contacto-link">
+              <div class="link-icon">gh</div>
+              github.com/leolorca
+            </a>
+          </div>
+        </div>
+
+        <!-- Formulario de contacto -->
+        <form>
+          <div class="form-group">
+            <label>NOMBRE</label>
+            <input type="text" placeholder="Tu nombre">
+          </div>
+          <div class="form-group">
+            <label>CORREO</label>
+            <input type="email" placeholder="tu@correo.com">
+          </div>
+          <div class="form-group">
+            <label>MENSAJE</label>
+            <textarea placeholder="Cuéntame sobre tu proyecto o consulta..."></textarea>
+          </div>
+          <button type="submit" class="btn-form">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Diseñado y desarrollado por Leonardo Lorca &nbsp;|&nbsp; 2025</p>
+  </footer>
+
+</body>
+</html>
